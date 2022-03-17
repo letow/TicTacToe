@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TicTacToe</title>
+    <style>
+        body{
+            background-color: #ececec;
+            font-size: 10px;
+            font-family: 'Arial',sans-serif;
+        }
+        h1{
+            text-align: center;
+            font-size: 3em;
+        }
+
+        .choose{
+            font-size: 2em;
+            margin: 1.5em 0;
+            text-align: center;
+        }
+        .choose > label{
+            margin: 0 1em;
+        }
+        .choose > input[type=radio]{
+            display: none;
+        }
+        .choose > input:checked + label{
+            text-decoration: underline;
+        }
+        .field{
+            width: 30em;
+            height: 29em;
+            background-color: rgb(255, 228, 247);
+            padding: 1em;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1em;
+            justify-content: space-evenly;
+            box-shadow: 0 0.2em 1em #2525257c;
+        }
+        .field-item{
+            width: 9em;
+            height: 9em;
+            background-color: rgb(93, 93, 93);
+        }
+        .field-item > input[type=checkbox]{
+            display: none;
+        }
+        .field-item > .ch:checked + .cell::before{
+            line-height: 1em;
+            font-size: 3em;
+        }
+        .cell{
+            display: block;
+            text-align: center;
+            font-size: 8em;
+            height: 3em;
+            max-height: 3em;
+            width: 100%;
+            color: #ececec;
+        }
+    </style>
+</head>
+<body>
+    <h1>TicTacToe</h1>
+    <main>
+        <div class="choose">
+            <input type="radio" id="crosses" name="turn" checked>
+            <label for="crosses">Crosses</label>
+            <input type="radio" id="noughts" name="turn">
+            <label for="noughts">Noughts</label>
+        </div>
+        <div class="field">
+            <div class="field-item">
+                <input type="checkbox" class="ch" id="f1">
+                <label class="cell" for="f1" id="f1l" onClick="putFigure(this.id)"></label>
+            </div>
+            <div class="field-item">
+                <input type="checkbox" class="ch" id="f2">
+                <label class="cell" for="f2" id="f2l" onClick="putFigure(this.id)"></label>
+            </div>
+            <div class="field-item">
+                <input type="checkbox" class="ch" id="f3">
+                <label class="cell" for="f3" id="f3l" onClick="putFigure(this.id)"></label>
+            </div>
+            <div class="field-item">
+                <input type="checkbox" class="ch" id="f4">
+                <label class="cell" for="f4" id="f4l" onClick="putFigure(this.id)"></label>
+            </div>
+            <div class="field-item">
+                <input type="checkbox" class="ch" id="f5">
+                <label class="cell" for="f5" id="f5l" onClick="putFigure(this.id)"></label>
+            </div>
+            <div class="field-item">
+                <input type="checkbox" class="ch" id="f6">
+                <label class="cell" for="f6" id="f6l" onClick="putFigure(this.id)"></label>
+            </div>
+            <div class="field-item">
+                <input type="checkbox" class="ch" id="f7">
+                <label class="cell" for="f7" id="f7l" onClick="putFigure(this.id)"></label>
+            </div>
+            <div class="field-item">
+                <input type="checkbox" class="ch" id="f8">
+                <label class="cell" for="f8" id="f8l" onClick="putFigure(this.id)"></label>
+            </div>
+            <div class="field-item">
+                <input type="checkbox" class="ch" id="f9">
+                <label class="cell" for="f9" id="f9l" onClick="putFigure(this.id)"></label>
+            </div>
+        </div>
+    </main>
+</body>
+<script>
+    let all = [0,1,2,3,4,5,6,7,8];
+    function ifwin(clicked_id, figure){
+        all[parseInt(clicked_id[1])-1] = figure;
+        win=false;
+        if(figure == 'X'){player = 'Crosses'} else {player = 'Noughts'}
+        if(all[0] === all[1] && all[0] === all[2] && all[0] != null){win=true; alert(player + ' won!'); document.location.reload();}
+        if(all[3] === all[4] && all[3] === all[5] && all[3] != null){win=true; alert(player + ' won!'); document.location.reload();}
+        if(all[6] === all[7] && all[6] === all[8] && all[6] != null){win=true; alert(player + ' won!'); document.location.reload();}
+        if(all[0] === all[3] && all[0] === all[6] && all[0] != null){win=true; alert(player + ' won!'); document.location.reload();}
+        if(all[1] === all[4] && all[1] === all[7] && all[1] != null){win=true; alert(player + ' won!'); document.location.reload();}
+        if(all[2] === all[5] && all[2] === all[8] && all[2] != null){win=true; alert(player + ' won!'); document.location.reload();}
+        if(all[0] === all[4] && all[0] === all[8] && all[0] != null){win=true; alert(player + ' won!'); document.location.reload();}
+        if(all[2] === all[4] && all[2] === all[6] && all[2] != null){win=true; alert(player + ' won!'); document.location.reload();}
+        if(!win && !(all.includes(0) || all.includes(1) || all.includes(2) || all.includes(3) || all.includes(4) || all.includes(5) || all.includes(6) || all.includes(7) || all.includes(8))){alert('Draw!'); document.location.reload();}
+    }
+    function putFigure(clicked_id){
+        if(document.getElementById('crosses').checked){
+            figure = 'X';
+        }
+        else{
+            figure = 'O';
+        }
+        if(document.getElementById(clicked_id).innerHTML == ''){
+            document.getElementById(clicked_id).innerHTML = figure;
+        }
+        else{
+            document.getElementById(clicked_id).innerHTML = '';
+        };
+        ifwin(clicked_id, figure);
+        if(document.getElementById('crosses').checked){
+            document.getElementById('noughts').checked = true;
+        }
+        else{
+            document.getElementById('crosses').checked = true;
+        }
+    }
+    
+</script>
+</html>
